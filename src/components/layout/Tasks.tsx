@@ -1,30 +1,28 @@
 import { Box, Checkbox, Flex, Input, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useToDosContext } from "../../todos/todos";
 import { Button, CloseIconButton } from "../Button";
 
 const ToDo = () => {
-  const { todos, setIsDone, setTodos } = useToDosContext();
+  const { todos, setTodos } = useToDosContext();
 
-  const [todo, setTodo] = useState("");
+  const [todoName, setTodoName] = useState("");
 
   const addTodo = () => {
-    if (todo !== "") {
-      setTodos([...todos, { isDone: false, task: todo }]);
-      setTodo("");
-      console.log(todos);
+    if (todoName !== "") {
+      setTodos([...todos, { isDone: false, task: todoName }]);
+      setTodoName("");
     }
     return;
   };
 
-  const handleComplete = (todo) => {
+  const handleComplete = (todo: { isDone: boolean; task: string }) => {
     todo.isDone = !todo.isDone;
     const newTodos = todos.filter((item) => item !== todo);
     setTodos([...newTodos, todo]);
   };
 
-  const deleteTodo = (todo) => {
-    console.log(todo, "clicked!");
+  const deleteTodo = (todo: { isDone: boolean; task: string }) => {
     const newTodos = todos.filter((item) => item !== todo);
     setTodos(newTodos);
   };
@@ -46,9 +44,9 @@ const ToDo = () => {
           border="none"
           borderRadius="5"
           focusBorderColor="#03dac5"
-          value={todo}
+          value={todoName}
           placeholder="Write new to do"
-          onChange={(e) => setTodo(e.target.value)}
+          onChange={(e) => setTodoName(e.target.value)}
         />
         <Button holderName="Add to do" ml="5" fontSize="16" onClick={addTodo} />
       </Flex>
