@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 
 function App() {
   return (
-    <Box color="#e4e4e4" bg="#121212" pb="10" h="100%">
+    <Box color="#e4e4e4" pb="10">
       <Navbar />
       <Tasks />
     </Box>

@@ -47,6 +47,7 @@ const ToDo = () => {
           value={todoName}
           placeholder="Write new to do"
           onChange={(e) => setTodoName(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && addTodo()}
         />
         <Button holderName="Add to do" ml="5" fontSize="16" onClick={addTodo} />
       </Flex>

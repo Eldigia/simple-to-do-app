@@ -1,5 +1,4 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
-import { MouseEventHandler } from "react";
 
 type Props = {
   holderName?: string;

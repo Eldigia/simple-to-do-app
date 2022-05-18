@@ -29,15 +29,15 @@ export function ToDosProvider({ children }: any) {
     },
     {
       isDone: isDone,
+      task: "Prepare dinner for the next day",
+    },
+    {
+      isDone: isDone,
+      task: "Pick up parcel ",
+    },
+    {
+      isDone: isDone,
       task: "Clean house a little bit",
-    },
-    {
-      isDone: isDone,
-      task: "Prepare for date",
-    },
-    {
-      isDone: isDone,
-      task: "Go to hairdresser",
     },
   ];
 
