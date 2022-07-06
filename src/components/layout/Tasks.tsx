@@ -51,7 +51,7 @@ const ToDo = () => {
           onChange={(e) => setTodoName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addTodo()}
         />
-        <Button holderName="Add to do" ml="5" fontSize="16" onClick={addTodo} />
+        <Button holderName="Add to do" ml="5" onClick={addTodo} />
       </Flex>
       <Box px="70">
         <Box>
@@ -59,7 +59,7 @@ const ToDo = () => {
             <Text fontSize="1.5rem" fontWeight="semibold">
               A list of to do
             </Text>
-            <Button holderName="Clear all tasks" fontSize="16" h="30" onClick={deleteAllTasks} />
+            <Button holderName="Clear all tasks" h="30" onClick={deleteAllTasks} />
           </Flex>
           <Box>
             {todos.map((todo) => {
@@ -96,7 +96,7 @@ const ToDo = () => {
                       justifyContent="space-between"
                       borderBottom="1px solid #2e2e2e"
                       py="4"
-                      key={`${todo.task}`}
+                      key={`${todo.id}`}
                     >
                       <Checkbox colorScheme="mint" isChecked onChange={() => handleComplete(todo)}>
                         <Text textDecoration="line-through" color="grey" fontSize="1.2rem">
