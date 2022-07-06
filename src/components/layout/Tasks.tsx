@@ -34,14 +34,15 @@ const ToDo = () => {
 
   return (
     <Box mx="100" px="10" bg="#1e1e1e" py="8" borderRadius="25">
-      <Flex h="45">
+      <Flex mb="5">
         <Input
-          fontSize="18"
+          fontSize="1.5rem"
           type="text"
           background="#121212"
           color="mint"
           pl="5"
           w="100%"
+          h="50"
           border="none"
           borderRadius="5"
           focusBorderColor="#03dac5"
@@ -55,7 +56,9 @@ const ToDo = () => {
       <Box px="70">
         <Box>
           <Flex my="15" justifyContent="space-between">
-            <Text fontSize="20">A list of to do</Text>
+            <Text fontSize="1.5rem" fontWeight="semibold">
+              A list of to do
+            </Text>
             <Button holderName="Clear all tasks" fontSize="16" h="30" onClick={deleteAllTasks} />
           </Flex>
           <Box>
@@ -66,11 +69,11 @@ const ToDo = () => {
                     align="center"
                     justifyContent="space-between"
                     borderBottom="1px solid #2e2e2e"
-                    py="3"
+                    py="4"
                     key={`${todo.id}`}
                   >
                     <Checkbox colorScheme="mint" onChange={() => handleComplete(todo)}>
-                      {todo.task}
+                      <Text fontSize="1.2rem">{todo.task}</Text>
                     </Checkbox>
                     <Box onClick={() => deleteTodo(todo)}>
                       <CloseIconButton />
@@ -81,7 +84,7 @@ const ToDo = () => {
             })}
           </Box>
           <Box mt="25">
-            <Text mb="25" fontSize="20">
+            <Text mb="25" fontSize="1.5rem" fontWeight="semibold">
               A list of completed to do
             </Text>
             <Box>
@@ -92,11 +95,13 @@ const ToDo = () => {
                       align="center"
                       justifyContent="space-between"
                       borderBottom="1px solid #2e2e2e"
-                      py="3"
+                      py="4"
                       key={`${todo.task}`}
                     >
                       <Checkbox colorScheme="mint" isChecked onChange={() => handleComplete(todo)}>
-                        {todo.task}
+                        <Text textDecoration="line-through" color="grey" fontSize="1.2rem">
+                          {todo.task}
+                        </Text>
                       </Checkbox>
                       <Box onClick={() => deleteTodo(todo)}>
                         <CloseIconButton />

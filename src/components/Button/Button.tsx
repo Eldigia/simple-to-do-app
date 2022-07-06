@@ -1,4 +1,4 @@
-import { Button as ChakraButton } from "@chakra-ui/react";
+import { Button as ChakraButton, Text } from "@chakra-ui/react";
 
 type Props = {
   holderName?: string;
@@ -14,6 +14,7 @@ export function Button({ holderName, ml, fontSize, h, onClick }: Props) {
       onClick={onClick}
       fontSize={fontSize}
       ml={ml}
+      my="auto"
       color="#333"
       background="mint"
       borderRadius="20"
@@ -28,7 +29,7 @@ export function Button({ holderName, ml, fontSize, h, onClick }: Props) {
         boxShadow: "0 0 1px 2px rgba(3,218, 197, .75)",
       }}
     >
-      {holderName}
+      <Text fontSize="1.2rem">{holderName}</Text>
     </ChakraButton>
   );
 }
