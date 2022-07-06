@@ -4,7 +4,7 @@ An app to track your tasks, add and delete them.
 
 ### Preview
 
-[Live deploy](https://tasks-progress-dnd.netlify.app/)
+[Live deploy](https://eld-simple-to-do-app.netlify.app)
 
 ### Technologies
 
