@@ -10,13 +10,14 @@ const ToDo = () => {
 
   const addTodo = () => {
     if (todoName !== "") {
-      setTodos([...todos, { isDone: false, task: todoName }]);
+      let randomId = Math.floor(Math.random() * 2000);
+      setTodos([...todos, { id: randomId, isDone: false, task: todoName }]);
       setTodoName("");
     }
     return;
   };
 
-  const handleComplete = (todo: { isDone: boolean; task: string }) => {
+  const handleComplete = (todo: { id: number; isDone: boolean; task: string }) => {
     todo.isDone = !todo.isDone;
     const newTodos = todos.filter((item) => item !== todo);
     setTodos([...newTodos, todo]);
@@ -66,7 +67,7 @@ const ToDo = () => {
                     justifyContent="space-between"
                     borderBottom="1px solid #2e2e2e"
                     py="3"
-                    key={`${todo.task}`}
+                    key={`${todo.id}`}
                   >
                     <Checkbox colorScheme="mint" onChange={() => handleComplete(todo)}>
                       {todo.task}
