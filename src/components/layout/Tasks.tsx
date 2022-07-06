@@ -1,6 +1,6 @@
 import { Box, Checkbox, Flex, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { useToDosContext } from "../../todos/todos";
+import { useToDosContext } from "../../context/todos";
 import { Button, CloseIconButton } from "../Button";
 
 const ToDo = () => {
