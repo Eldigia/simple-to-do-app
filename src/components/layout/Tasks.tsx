@@ -1,7 +1,8 @@
-import { Box, Checkbox, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Icon, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { MdClose } from "react-icons/md";
 import { useToDosContext } from "../../context/todos";
-import { Button, CloseIconButton } from "../Button";
+import { Button } from "../Button";
 
 const ToDo = () => {
   const { todos, setTodos } = useToDosContext();
@@ -10,7 +11,7 @@ const ToDo = () => {
 
   const addTodo = () => {
     if (todoName !== "") {
-      let randomId = Math.floor(Math.random() * 2000);
+      const randomId = Math.floor(Math.random() * 2000);
       setTodos([...todos, { id: randomId, isDone: false, task: todoName }]);
       setTodoName("");
     }
@@ -33,19 +34,18 @@ const ToDo = () => {
   };
 
   return (
-    <Box mx="100" px="10" bg="#1e1e1e" py="8" borderRadius="25">
+    <Box mx="10" px="10" bg="#1e1e1e" py="8" borderRadius="20px">
       <Flex mb="5">
         <Input
           fontSize="1.5rem"
           type="text"
           background="#121212"
-          color="mint"
           pl="5"
           w="100%"
           h="50"
           border="none"
           borderRadius="5"
-          focusBorderColor="#03dac5"
+          colorPalette="teal"
           value={todoName}
           placeholder="Write new to do"
           onChange={(e) => setTodoName(e.target.value)}
@@ -55,7 +55,7 @@ const ToDo = () => {
       </Flex>
       <Box px="70">
         <Box>
-          <Flex my="15" justifyContent="space-between">
+          <Flex mt="10" justifyContent="space-between">
             <Text fontSize="1.5rem" fontWeight="semibold">
               A list of to do
             </Text>
@@ -72,19 +72,22 @@ const ToDo = () => {
                     py="4"
                     key={`${todo.id}`}
                   >
-                    <Checkbox colorScheme="mint" onChange={() => handleComplete(todo)}>
-                      <Text fontSize="1.2rem">{todo.task}</Text>
-                    </Checkbox>
+                    <Checkbox.Root checked={todo.isDone} onClick={() => handleComplete(todo)}>
+                      <Checkbox.Control />
+                      <Text fontSize="1.1rem">{todo.task}</Text>
+                    </Checkbox.Root>
                     <Box onClick={() => deleteTodo(todo)}>
-                      <CloseIconButton />
+                      <Icon>
+                        <MdClose size={20} />
+                      </Icon>
                     </Box>
                   </Flex>
                 );
               }
             })}
           </Box>
-          <Box mt="25">
-            <Text mb="25" fontSize="1.5rem" fontWeight="semibold">
+          <Box mt="8">
+            <Text fontSize="1.5rem" fontWeight="semibold">
               A list of completed to do
             </Text>
             <Box>
@@ -98,13 +101,16 @@ const ToDo = () => {
                       py="4"
                       key={`${todo.id}`}
                     >
-                      <Checkbox colorScheme="mint" isChecked onChange={() => handleComplete(todo)}>
-                        <Text textDecoration="line-through" color="grey" fontSize="1.2rem">
+                      <Checkbox.Root checked={todo.isDone} onClick={() => handleComplete(todo)}>
+                        <Checkbox.Control />
+                        <Text textDecoration="line-through" color="grey" fontSize="1.1rem">
                           {todo.task}
                         </Text>
-                      </Checkbox>
+                      </Checkbox.Root>
                       <Box onClick={() => deleteTodo(todo)}>
-                        <CloseIconButton />
+                        <Icon>
+                          <MdClose size={20} />
+                        </Icon>
                       </Box>
                     </Flex>
                   );

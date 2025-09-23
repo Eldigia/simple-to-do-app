@@ -1,6 +1,6 @@
+import { Box } from "@chakra-ui/react";
 import Navbar from "./components/layout/Navbar";
 import Tasks from "./components/layout/Tasks";
-import { Box } from "@chakra-ui/react";
 
 function App() {
   return (

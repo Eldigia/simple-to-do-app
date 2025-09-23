@@ -16,15 +16,13 @@ export function Button({ holderName, ml, fontSize, h, onClick }: Props) {
       ml={ml}
       my="auto"
       color="#333"
-      background="mint"
+      background="brand.solid"
       borderRadius="20"
       border="none"
       cursor="pointer"
       px="10"
       py="5"
       h={h}
-      _hover={{ style: "none" }}
-      _active={{ style: "none" }}
       _focus={{
         boxShadow: "0 0 1px 2px rgba(3,218, 197, .75)",
       }}
