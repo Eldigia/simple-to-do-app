@@ -12,6 +12,7 @@
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.13.0",
     "framer-motion": "12.23.19",
+    "jotai": "^2.14.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-icons": "^5.5.0"

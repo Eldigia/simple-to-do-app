@@ -1,36 +1,29 @@
 import { Box, Checkbox, Flex, Icon, Input, Text } from "@chakra-ui/react";
+import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { useToDosContext } from "../../context/todos";
+import { tasksConfigAtom } from "../../store/tasksConfig";
 import { Button } from "../Button";
 
 const ToDo = () => {
-  const { todos, setTodos } = useToDosContext();
+  const [todoDescription, setTodoDescription] = useState("");
+  const { tasks, handleSetTasks, handleDeleteTask } = useToDosContext();
 
-  const [todoName, setTodoName] = useState("");
+  const setNewTasks = useSetAtom(tasksConfigAtom);
 
   const addTodo = () => {
-    if (todoName !== "") {
+    if (todoDescription !== "") {
       const randomId = Math.floor(Math.random() * 2000);
-      setTodos([...todos, { id: randomId, isDone: false, task: todoName }]);
-      setTodoName("");
+
+      setNewTasks({ ...tasks, incompleted: [...tasks.incompleted, { id: randomId, description: todoDescription }] });
+      setTodoDescription("");
     }
     return;
   };
 
-  const handleComplete = (todo: { id: number; isDone: boolean; task: string }) => {
-    todo.isDone = !todo.isDone;
-    const newTodos = todos.filter((item) => item !== todo);
-    setTodos([...newTodos, todo]);
-  };
-
-  const deleteTodo = (todo: { isDone: boolean; task: string }) => {
-    const newTodos = todos.filter((item) => item !== todo);
-    setTodos(newTodos);
-  };
-
   const deleteAllTasks = () => {
-    setTodos([]);
+    setNewTasks({ incompleted: [], completed: [] });
   };
 
   return (
@@ -46,9 +39,9 @@ const ToDo = () => {
           border="none"
           borderRadius="5"
           colorPalette="teal"
-          value={todoName}
+          value={todoDescription}
           placeholder="Write new to do"
-          onChange={(e) => setTodoName(e.target.value)}
+          onChange={(e) => setTodoDescription(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addTodo()}
         />
         <Button holderName="Add to do" ml="5" onClick={addTodo} />
@@ -62,60 +55,46 @@ const ToDo = () => {
             <Button holderName="Clear all tasks" h="30" onClick={deleteAllTasks} />
           </Flex>
           <Box>
-            {todos.map((todo) => {
-              if (todo.isDone === false) {
-                return (
-                  <Flex
-                    align="center"
-                    justifyContent="space-between"
-                    borderBottom="1px solid #2e2e2e"
-                    py="4"
-                    key={`${todo.id}`}
-                  >
-                    <Checkbox.Root checked={todo.isDone} onClick={() => handleComplete(todo)}>
-                      <Checkbox.Control />
-                      <Text fontSize="1.1rem">{todo.task}</Text>
-                    </Checkbox.Root>
-                    <Box onClick={() => deleteTodo(todo)}>
-                      <Icon>
-                        <MdClose size={20} />
-                      </Icon>
-                    </Box>
-                  </Flex>
-                );
-              }
-            })}
+            {tasks?.incompleted?.map(({ id, description }) => (
+              <Flex align="center" justifyContent="space-between" borderBottom="1px solid #2e2e2e" py="4" key={`${id}`}>
+                <Checkbox.Root checked={false} onClick={() => handleSetTasks({ id, isDone: true })}>
+                  <Checkbox.Control />
+                  <Text fontSize="1.1rem">{description}</Text>
+                </Checkbox.Root>
+                <Box onClick={() => handleDeleteTask({ id, isDone: false })}>
+                  <Icon>
+                    <MdClose size={20} />
+                  </Icon>
+                </Box>
+              </Flex>
+            ))}
           </Box>
           <Box mt="8">
             <Text fontSize="1.5rem" fontWeight="semibold">
               A list of completed to do
             </Text>
             <Box>
-              {todos.map((todo) => {
-                if (todo.isDone === true) {
-                  return (
-                    <Flex
-                      align="center"
-                      justifyContent="space-between"
-                      borderBottom="1px solid #2e2e2e"
-                      py="4"
-                      key={`${todo.id}`}
-                    >
-                      <Checkbox.Root checked={todo.isDone} onClick={() => handleComplete(todo)}>
-                        <Checkbox.Control />
-                        <Text textDecoration="line-through" color="grey" fontSize="1.1rem">
-                          {todo.task}
-                        </Text>
-                      </Checkbox.Root>
-                      <Box onClick={() => deleteTodo(todo)}>
-                        <Icon>
-                          <MdClose size={20} />
-                        </Icon>
-                      </Box>
-                    </Flex>
-                  );
-                }
-              })}
+              {tasks?.completed?.map(({ id, description }) => (
+                <Flex
+                  align="center"
+                  justifyContent="space-between"
+                  borderBottom="1px solid #2e2e2e"
+                  py="4"
+                  key={`${id}`}
+                >
+                  <Checkbox.Root checked onClick={() => handleSetTasks({ id, isDone: false })}>
+                    <Checkbox.Control />
+                    <Text textDecoration="line-through" color="grey" fontSize="1.1rem">
+                      {description}
+                    </Text>
+                  </Checkbox.Root>
+                  <Box onClick={() => handleDeleteTask({ id, isDone: true })}>
+                    <Icon>
+                      <MdClose size={20} />
+                    </Icon>
+                  </Box>
+                </Flex>
+              ))}
             </Box>
           </Box>
         </Box>
