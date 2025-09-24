@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { createContext, useContext } from "react";
+import { createContext, type ReactElement, useContext } from "react";
 import { tasksConfigAtom } from "../store/tasksConfig";
 
 type Task = {
@@ -29,7 +29,7 @@ export function useToDosContext() {
   return useContext(ToDosContext);
 }
 
-export function ToDosProvider({ children }: any) {
+export function ToDosProvider({ children }: { children: ReactElement }) {
   const [tasks, setTasks] = useAtom(tasksConfigAtom);
 
   const handleSetTasks = ({ id, isDone }: { id: number; isDone: boolean }) => {
