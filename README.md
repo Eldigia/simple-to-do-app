@@ -12,3 +12,4 @@ An app to track your tasks, add and delete them.
 * TypeScript
 * Vite
 * ChakraUI
+* jotai
